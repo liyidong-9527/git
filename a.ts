@@ -35,3 +35,23 @@ interface IsTruct {
 // }
 
 type Demo  = (string | number ) | null
+
+interface IFoo {
+  prop1:string;
+  prop2:number;
+  prop3:boolean;
+  prop4:() =>{}
+}
+type Partial<T> = {
+  [P in keyof T]?:T[P]
+} 
+
+type IFoo2 = Partial<IFoo>
+
+type ProcessInput<
+  Input,
+  SecondInput extends Input = Input,
+  ThirdInput extends Input = SecondInput
+> = number;
+
+const b:ProcessInput<number,1,2> = 5 
