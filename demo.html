@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<div id="g-content">
+
+  <div class="g-box">F</div>
+  <button id="btn">aaa</button>
+</div>
+  
+</body>
+</html>
+
+<style>
+  #g-content {
+    width: 300px;
+    height: 170vh;
+    background: #999;
+  }
+  .g-box{
+    font-size: 150px;
+    margin: 70vh auto 0;
+    animation-name: rotate;
+    animation-duration: 3s;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+    animation-timeline: scroll(block nearest);
+  }
+ 
+
+  @keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@scroll-timeline box-rotate {
+    source: selector("#g-content");
+}
+
+</style>
+<script>
+
+// 原型模式
+{
+  var Person = function (name,hobby) {
+    this.name = name;
+    this.hobby = hobby;
+  }
+
+  Person.prototype.basicInfo = {
+    address:'上海市 徐汇区',
+    school:'上海大学',
+    major:'计算机'
+  }
+
+  Person.prototype.sayHi = function () {
+    console.log('大家好，我是' + this.name + '我的爱好是：'+this.hobby);
+  }
+
+
+  var person1 = new Person('李义东','吃饭');
+  person1.sayHi();
+  console.log(person1.basicInfo);
+
+  var person2 = new Person('李xx','做饭');
+  person2.sayHi();
+  console.log(person2.basicInfo);
+}
+
+// 单例模式
+
+{
+  var singleInstanceMode = function(fn) {
+    var instance;
+    return function () {
+      return instance || (instance = fn.call(this.arguments));
+    }
+  }
+
+  var targetFn = function () {
+    return {
+      info:'这是唯一一个实例'
+    }
+  }
+
+  var createSingleInstance = singleInstanceMode(targetFn);
+
+  var instance1 = new createSingleInstance();
+
+  var instance2 = new createSingleInstance();
+
+  console.log(instance1 === instance2)
+
+}
+
+{
+  const btn = document.getElementById('btn')
+  btn.onclick = () => {console.log('aaa');}
+  // document.getElementById('btn').addEventListener('click',() => {console.log('aaa');})
+  console.log(btn);
+}
+</script>
